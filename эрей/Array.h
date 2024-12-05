@@ -87,6 +87,9 @@ public:
         delete mass;
         mass = mas;
     }
+    Array* const GetData() {
+        return this;
+    }
     void InsertAt(const T& n, int c) {
         Pushback(n);
         for (int i = size - 1; i > c; i--) {
