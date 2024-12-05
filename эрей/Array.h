@@ -70,6 +70,23 @@ public:
         aver /= size;
         return aver;
     }
+    T GetAt(int index) {
+        return *this[index];
+    }
+    void SetAt(int index, T smth) {
+        *this[index] = smth;
+    }
+    void Append(const Array& it) {
+        T* mas = new T[size + it.size];
+        for (int i = 0; i < size; i++) {
+            mas[i] = mass[i];
+        }
+        for (int i = 0; i < it.size; i++) {
+            mas[i + size] = it.mass[i];
+        }
+        delete mass;
+        mass = mas;
+    }
     void InsertAt(const T& n, int c) {
         Pushback(n);
         for (int i = size - 1; i > c; i--) {
@@ -81,5 +98,21 @@ public:
             std::swap(mass[i], mass[i + 1]);
         }
         size--;
+    }
+    T& operator [] (int index) {
+        if (index < 0 || index >= size)
+            throw std::out_of_range("ur dumb");
+        return mass[index];
+    }
+    T& operator = (const T& it) {
+        capacity = it.capacity;
+        size = it.size;
+        grow = it.grow;
+        T* m = new T[capacity];
+        for (int i = 0; i < size; i++) {
+            m[i] = mass[i];
+        }
+        delete[] mass;
+        mass = m;
     }
 };
