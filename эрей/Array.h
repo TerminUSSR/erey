@@ -5,6 +5,11 @@ class Array {
     int size;
     int capacity;
     int grow;
+    T& operator [] (int index) {
+        if (index < 0 || index >= size)
+            throw std::out_of_range("ur dumb");
+        return mass[index];
+    }
 public:
     Array(int capacity) : mass(new T[capacity]), capacity(capacity), size(0), grow(1) {}
     Array() : mass(nullptr), size(0), capacity(0), grow(1) {}
@@ -101,11 +106,6 @@ public:
             std::swap(mass[i], mass[i + 1]);
         }
         size--;
-    }
-    T& operator [] (int index) {
-        if (index < 0 || index >= size)
-            throw std::out_of_range("ur dumb");
-        return mass[index];
     }
     T& operator = (const T& it) {
         capacity = it.capacity;
